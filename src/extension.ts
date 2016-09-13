@@ -6,22 +6,7 @@ import * as vscode from 'vscode';
 import * as ls from './Settings';
 import * as srv from './Server';
 import * as path from "path";
-
-class VsCodeHelper
-{
-    static StatusBar = null;
-    static OutputChannel = null;
-    static GetOutputChannel(): vscode.OutputChannel
-    {
-
-        return VsCodeHelper.OutputChannel == null ? VsCodeHelper.OutputChannel = vscode.window.createOutputChannel("IIS-Express executer") : VsCodeHelper.OutputChannel;
-    }
-    static GetStatusBarItem(): vscode.StatusBarItem
-    {
-        return VsCodeHelper.StatusBar != null ? VsCodeHelper.StatusBar : VsCodeHelper.StatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
-    }
-}
-
+import * as vsh from "./VScodeHelper";
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext)
@@ -207,11 +192,11 @@ export function activate(context: vscode.ExtensionContext)
             vscode.window.showErrorMessage("No server is running");
         else
             vscode.window.showInformationMessage("Server has been stopped");
-        VsCodeHelper.GetOutputChannel().clear();
-        VsCodeHelper.GetOutputChannel().hide();
-        VsCodeHelper.GetOutputChannel().dispose();
-        VsCodeHelper.GetStatusBarItem().hide();
-        VsCodeHelper.GetStatusBarItem().dispose();
+        vsh.VsCodeHelper.GetOutputChannel().clear();
+        vsh.VsCodeHelper.GetOutputChannel().hide();
+        vsh.VsCodeHelper.GetOutputChannel().dispose();
+        vsh.VsCodeHelper.GetStatusBarItem().hide();
+        vsh.VsCodeHelper.GetStatusBarItem().dispose();
     });
     let disposableStart = vscode.commands.registerCommand('iisee.startServer', (args) =>
     {
@@ -219,11 +204,11 @@ export function activate(context: vscode.ExtensionContext)
         ls.LoadSettings();
         var iisServer = new srv.Server(ls.LoadedSettings);
         //iisServer.StartServer();
-        let output = VsCodeHelper.GetOutputChannel();
+        let output = vsh.VsCodeHelper.GetOutputChannel();
         let url = "Connecting to: http:\\\\localhost:" + iisServer.Settings.Port;
         output.show(vscode.ViewColumn.Three);
         output.appendLine(url);
-        let statusBar = VsCodeHelper.GetStatusBarItem();
+        let statusBar = vsh.VsCodeHelper.GetStatusBarItem();
         statusBar.text = "$(browser) " + url;
         statusBar.tooltip = "Click to stop server";
         statusBar.command = "extension:iisee.stopServer";

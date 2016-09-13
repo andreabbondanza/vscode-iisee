@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 import * as vscode from "vscode";
 import * as fs from "fs";
@@ -7,7 +7,7 @@ import * as path from "path";
 import * as prc from "child_process";
 import * as settings from "./Settings";
 import * as iconv from "iconv-lite";
-
+import * as vsh from "./VScodeHelper";
 /**Errors */
 export enum ServerExecutionError
 {
@@ -33,7 +33,7 @@ interface IServer
     StartServer(port: number, currentPath: string): void;
     /**Stop server */
     StopServer(): void;
-    DecodeBuffer(daty:any): any;
+    DecodeBuffer(daty: any): any;
 }
 
 /**Server implementation */
@@ -106,20 +106,20 @@ export class Server implements IServer
     {
         Server.Process = prc.spawn(this.Settings.IISPath, [(".path:" + this.Settings.RunningFolder), ("-port:" + this.Settings.Port)]);
         //Attach all the events & functions to iisProcess
-        Server.Process.stdout.on('data', function (data) {
-            var data = this.decode2gbk(data);
-            _this._output.appendLine(data);
-            console.log("stdout: " + data);
+        Server.Process.stdout.on('data', function (data)
+        {
+            var data = this.DecodeBuffer(data);
+            vsh.VsCodeHelper.GetOutputChannel().appendLine(data);
         });
-        this._iisProcess.stderr.on('data', function (data) {
-            var data = _this.decode2gbk(data);
-            _this._output.appendLine("stderr: " + data);
-            console.log("stderr: " + data);
+        Server.Process.stderr.on('data', function (data)
+        {
+            var data = this.DecodeBuffer(data);
+            vsh.VsCodeHelper.GetOutputChannel().appendLine("stderr: " + data);            
         });
-        this._iisProcess.on('error', function (err) {
-            var message = _this.decode2gbk(err.message);
-            _this._output.appendLine("ERROR: " + message);
-            console.log("ERROR: " + message);
+        Server.Process.on('error', function (err)
+        {
+            var message = this.DecodeBuffer(err.message);
+            vsh.VsCodeHelper.GetOutputChannel().appendLine("ERROR: " + message);            
         });
     }
     StopServer(): boolean
