@@ -4,8 +4,11 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as os from "os";
 import * as path from "path";
+import * as prc from "child_process";
 import * as settings from "./Settings";
+import * as iconv from "iconv-lite";
 
+/**Errors */
 export enum ServerExecutionError
 {
     OK,
@@ -14,13 +17,12 @@ export enum ServerExecutionError
     NoFolderInWorkspace,
     ERROR
 }
-
-
+/**Extends the IJSONSettings (maybe for only server settings) */
 interface IISSettings extends settings.IJSONSettings
 {
 
 }
-
+/**Server interface */
 interface IServer
 {
     /**Server settings */
@@ -28,14 +30,18 @@ interface IServer
     /**Check if the environment can run extension and server */
     CheckEnvironment(): ServerExecutionError;
     /**Start the server */
-    StartServer(port:number, currentPath:string): void;
+    StartServer(port: number, currentPath: string): void;
     /**Stop server */
     StopServer(): void;
+    DecodeBuffer(daty:any): any;
 }
 
+/**Server implementation */
 export class Server implements IServer
 {
+    static Process = null;
     Settings: IISSettings;
+
     CheckEnvironment(): ServerExecutionError
     {
         //Check if the OS is windows
@@ -65,10 +71,10 @@ export class Server implements IServer
             {
                 case settings.OSArch.x64:
                     {
-                        iisPath = path.join(process.env.ProgramFilesW6432, 'IIS Express', 'iisexpress.exe');
+                        iisPath = path.join(process.env.ProgramW6432, 'IIS Express', 'iisexpress.exe');
                         break;
                     }
-                case settings.OSArch.x64:
+                case settings.OSArch.x86:
                     {
                         iisPath = path.join(process.env.ProgramFiles, 'IIS Express', 'iisexpress.exe');
                         break;
@@ -92,17 +98,44 @@ export class Server implements IServer
             {
                 vscode.window.showErrorMessage("Something wrong finding into :" + iisPath + ". Details: " + err.message);
                 return ServerExecutionError.ERROR;
-            }            
+            }
         }
         return ServerExecutionError.OK;
     }
     StartServer(): void
     {
-
+        Server.Process = prc.spawn(this.Settings.IISPath, [(".path:" + this.Settings.RunningFolder), ("-port:" + this.Settings.Port)]);
+        //Attach all the events & functions to iisProcess
+        Server.Process.stdout.on('data', function (data) {
+            var data = this.decode2gbk(data);
+            _this._output.appendLine(data);
+            console.log("stdout: " + data);
+        });
+        this._iisProcess.stderr.on('data', function (data) {
+            var data = _this.decode2gbk(data);
+            _this._output.appendLine("stderr: " + data);
+            console.log("stderr: " + data);
+        });
+        this._iisProcess.on('error', function (err) {
+            var message = _this.decode2gbk(err.message);
+            _this._output.appendLine("ERROR: " + message);
+            console.log("ERROR: " + message);
+        });
     }
-    StopServer(): void
+    StopServer(): boolean
     {
-
+        if (Server.Process == null)
+        {
+            return false;
+        }
+        Server.Process.kill('SIGINT');
+        Server.Process = null;
+        return true;
+    }
+    DecodeBuffer(data: any): any
+    {
+        var buffer = new Buffer(data);
+        return iconv.decode(buffer, 'utf8');
     }
     constructor(settings: IISSettings)
     {

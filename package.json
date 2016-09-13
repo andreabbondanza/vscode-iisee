@@ -1,71 +1,93 @@
 {
-    "name": "iis-express-executer",
-    "displayName": "IIS Express executer",
-    "description": "",
-    "version": "0.0.1",
-    "publisher": "Andreabbondanza",
-    "engines": {
-        "vscode": "^1.4.0"
-    },
-    "categories": [
-        "Other"
+  "name": "iis-express-executer",
+  "displayName": "IIS Express executer",
+  "description": "",
+  "version": "0.0.1",
+  "publisher": "Andreabbondanza",
+  "engines": {
+    "vscode": "^1.4.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:iisee.checkComp",
+    "onCommand:iisee.setPort",
+    "onCommand:iisee.setIISPath",
+    "onCommand:iisee.reset",
+    "onCommand:iisee.setRunningFolder",
+    "onCommand:iisee.startServer",
+    "onCommand:iisee.stopServer",
+    "onCommand:iisee.setOSArch"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "iisee.checkComp",
+        "title": "Check if your environment can run IIS-Express-Executer",
+        "category": "IIS-EE"
+      },
+      {
+        "command": "iisee.reset",
+        "title": "Reset settings for current environment",
+        "category": "IIS-EE"
+      },
+      {
+        "command": "iisee.setPort",
+        "title": "Set server port",
+        "category": "IIS-EE"
+      },
+      {
+        "command": "iisee.setRunningFolder",
+        "title": "Set server running folder",
+        "category": "IIS-EE"
+      },
+      {
+        "command": "iisee.setIISPath",
+        "title": "Set IIS custom path, with file (eg. \"Mypath\\IIS Express\\iisexpress.exe\")",
+        "category": "IIS-EE"
+      },
+      {
+        "command": "iisee.setOSArch",
+        "title": "Set operating system architecture",
+        "category": "IIS-EE"
+      },
+      {
+        "command": "iisee.startServer",
+        "title": "Start ISS Express server",
+        "category": "IIS-EE"
+      },
+      {
+        "command": "iisee.stopServer",
+        "title": "Stop ISS Express server",
+        "category": "IIS-EE"
+      }
     ],
-    "activationEvents": [
-        "onCommand:iisee.checkComp",
-        "onCommand:iisee.setPort"
-    ],
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [{
-            "command": "iisee.checkComp",
-            "title": "Check if your environment can run IIS-Express-Executer",
-            "category": "IIS-EE"
-        },
-                {
-            "command": "iisee.setPort",
-            "title": "Set server port",
-            "category": "IIS-EE"
-        },
-                {
-            "command": "iisee.setRunningFolder",
-            "title": "Set server running folder",
-            "category": "IIS-EE"
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "iisee.startServer",
+          "group": "IIS-EE"
         },
         {
-            "command": "iisee.setIISPath",
-            "title": "Set IIS custom path, with file (eg. \"Mypath\\IIS Express\\iisexpress.exe\")",
-            "category": "IIS-EE"
-        },
-        {
-            "command": "iisee.setOSArch",
-            "title": "IIS-EE: Set operating system architecture",
-            "category": "IIS-EE"
-        },
-        {
-            "command": "iisee.startServer",
-            "title": "IIS-EE: Execute ISS Express server",
-            "category": "IIS-EE"
-        }],
-        "menus": {
-			"explorer/context": [
-				{
-					"command": "iisee.startServer",
-					"group": "IIS-EE"
-				},
-                	{
-					"command": "iisee.setRunningFolder",
-					"group": "IIS-EE"
-				}
-			]
-		}
-    },
-    "scripts": {
-        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install"
-    },
-    "devDependencies": {
-        "typescript": "^1.8.5",
-        "vscode": "^0.11.0"
+          "command": "iisee.setRunningFolder",
+          "group": "IIS-EE"
+        }
+      ]
     }
+  },
+  "scripts": {
+    "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "iconv-lite": "^0.4.13",
+    "typescript": "^1.8.5",
+    "vscode": "^0.11.0"
+  },
+  "dependencies": {
+    "iconv-lite": "^0.4.13"
+  }
 }

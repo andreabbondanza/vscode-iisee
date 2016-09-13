@@ -32,8 +32,11 @@ interface ILocalSettings
     GetLocalSettings(): string;
     SetLocalSettings(json: string): boolean;
     CreateLocalSettingsFile(): boolean;
-    CanOperate(): boolean
+    CanOperate(): boolean,
+    GetDefaultSettings():IJSONSettings
 }
+
+
 
 export class LocalSettings implements ILocalSettings
 {
@@ -101,7 +104,7 @@ export class LocalSettings implements ILocalSettings
                 fs.mkdirSync(this.DefaultPath);
             }
             let settings: IJSONSettings;
-            settings = { Port: 11117, RunningFolder: ".", Architecture: OSArch.x86, IISPath: path.join(process.env.ProgramFilesW6432, 'IIS Express', 'iisexpress.exe') }
+            settings = this.GetDefaultSettings();
             fs.closeSync(fs.openSync(this.DefaultFile, 'w'));
             fs.writeFileSync(this.DefaultFile, JSON.stringify(settings), ["utf8"]);
             return true;
@@ -117,6 +120,10 @@ export class LocalSettings implements ILocalSettings
             return true;
         else
             return false;
+    }
+    GetDefaultSettings(): IJSONSettings
+    {
+        return { Port: 11117, RunningFolder: ".", Architecture: OSArch.x86, IISPath: path.join(process.env.ProgramFiles, 'IIS Express', 'iisexpress.exe') };
     }
     /**Constructor */
     constructor()
