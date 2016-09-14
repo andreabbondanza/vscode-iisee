@@ -5,10 +5,24 @@
   "version": "1.0.0",
   "license": "MIT",
   "publisher": "Andreabbondanza",
+  "icon": "images/icon.png",
   "repository": {
-    "url": "github url",
+    "url": "https://github.com/andreabbondanza/vscode-iisee",
     "type": "Open Source"
   },
+  "keywords": [
+    "server","iis","express","iis express"
+  ],
+  "author": {
+    "name":"Andrea Vincenzo Abbondanza",
+    "email": "andreabbondanza.developer@outlook.com",
+    "url": "http://www.andrewdev.eu"
+  },
+  "galleryBanner": {
+    "theme": "light",
+    "color": "#FFFFFF"
+  },
+  "homepage": "https://github.com/andreabbondanza/vscode-iisee/blob/master/README.md",  
   "engines": {
     "vscode": "^1.4.0"
   },
