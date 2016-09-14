@@ -41,11 +41,11 @@ You can stop the server by typing IIS-EE: "Stop" option or clicking on the serve
 ## Features
 
 - Check if your environment is compatible
-- Set a custom path for iis isntallation
-- Set a custom path for iis execution (you can also set it directly from workspace with right click context button)
-- Execute server directly in a folder from right button context menu
+- Set a custom path for iis installation
+- Set a custom path for iis execution (you can also set it directly from workspace with mouse context menu)
+- Execute the server directly in a folder from mouse context menu
 - Reset default settings if you need
-- Select which browser you want open (MSEdge, Opera, Firefox, Chrome)
+- Select the browser you want to open (MSEdge, Opera, Firefox, Chrome)
 - Set the port
 
 ## Requirements
