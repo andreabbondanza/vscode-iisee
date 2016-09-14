@@ -81,10 +81,11 @@ export function activate(context: vscode.ExtensionContext)
                 if (!val || val == "" || val == null)
                     return;
                 else
-                {
+                {   //get settings and check if are availables
                     let localSettings = new ls.LocalSettings();
                     if (localSettings.CanOperate())
                     {
+                        //set port setting and update
                         localSettings.LoadSettings();
                         localSettings.LoadedSettings.Port = +val;
                         localSettings.UpdateSettings(localSettings.LoadedSettings);
@@ -109,10 +110,11 @@ export function activate(context: vscode.ExtensionContext)
                 if (!val || val == "" || val == null)
                     return;
                 else
-                {
+                {   //get settings and check if are availables
                     let localSettings = new ls.LocalSettings();
                     if (localSettings.CanOperate())
                     {
+                        //set iis path setting and update
                         localSettings.LoadSettings();
                         localSettings.LoadedSettings.IISPath = val;
                         localSettings.UpdateSettings(localSettings.LoadedSettings);
@@ -125,9 +127,10 @@ export function activate(context: vscode.ExtensionContext)
     }, this);
     let disposableReset = vscode.commands.registerCommand('iisee.reset', () =>
     {
+        //load settings and check if they are availables
         let localSettings = new ls.LocalSettings();
         if (localSettings.CanOperate())
-        {
+        {   //reset settings and update 
             localSettings.UpdateSettings(localSettings.GetDefaultSettings());
             vscode.window.showInformationMessage("Settings have been restored to default values");
         }
@@ -136,17 +139,24 @@ export function activate(context: vscode.ExtensionContext)
     }, this);
     let disposableSetRunningFolder = vscode.commands.registerCommand('iisee.setRunningFolder', (args) =>
     {
-        if (!args)
+        let nextPath = vscode.workspace.rootPath;
+        //if opened by context menu args is null (and this means that we are in the root workspace directory)
+        //if opened from console, args is undefined
+        //if undefined show the popup
+        if (args !== null && !args)
         {
             let iBox = vscode.window.showInputBox({
-                placeHolder: "Default \".\"",
+                placeHolder: "Default " + nextPath,
                 prompt: "Select the site root path for the server",
                 validateInput: (val: string) => { if (val == null || !val || val == "") return "Cannot insert empty path"; }
             }).then(SetRunningFolder);
         }
         else
-        {
-            var basePath = path.dirname(args._fsPath);
+        {   //else check if args is null (so I set nextPath to the workspace directory)
+            if (args != null)
+                nextPath = args._fsPath;
+            //remove eventually file in the path
+            var basePath = path.extname(nextPath) != "" ? path.dirname(nextPath) : nextPath;
             SetRunningFolder(basePath);
         }
     }, this);
@@ -183,40 +193,87 @@ export function activate(context: vscode.ExtensionContext)
         );
 
     }, this);
+    let disposableSetBrow = vscode.commands.registerCommand('iisee.setBrowser', (args) =>
+    {
+        var qPick = vscode.window.showQuickPick(["Edge", "Opera", "Firefox", "Chrome"], { placeHolder: "Edge" }).then((args) => 
+        {
+            if (!args)
+                return;
+            else
+            {
+                let brow = ls.Browser.MSEdge;
+                switch (args)
+                {
+                    case "Opera":
+                        {
+                            brow = ls.Browser.Opera;
+                            break;
+                        }
+                    case "Firefox":
+                        {
+                            brow = ls.Browser.Firefox;
+                            break;
+                        }
+                    case "Chrome":
+                        {
+                            brow = ls.Browser.Chrome;
+                            break;
+                        }
+                }
+                let localSettings = new ls.LocalSettings();
+                if (localSettings.CanOperate())
+                {
+                    localSettings.LoadSettings();
+                    localSettings.LoadedSettings.Browser = brow;
+                    localSettings.UpdateSettings(localSettings.LoadedSettings);
+                    vscode.window.showInformationMessage("The current browser is : " + args);
+                }
+                else
+                    vscode.window.showErrorMessage("You need to open a workspace directory before proceed");
+            }
+        }
+
+        );
+
+    }, this);
     let disposableStop = vscode.commands.registerCommand('iisee.stopServer', (args) =>
     {
-        var ls = new ls.LocalSettings();
-        ls.LoadSettings();
-        var iisServer = new srv.Server(ls.LoadedSettings);
+        let localSettings = new ls.LocalSettings();
+        localSettings.LoadSettings();
+        var iisServer = new srv.Server(localSettings.LoadedSettings);
         if (!iisServer.StopServer())
             vscode.window.showErrorMessage("No server is running");
         else
             vscode.window.showInformationMessage("Server has been stopped");
-        vsh.VsCodeHelper.GetOutputChannel().clear();
-        vsh.VsCodeHelper.GetOutputChannel().hide();
-        vsh.VsCodeHelper.GetOutputChannel().dispose();
-        vsh.VsCodeHelper.GetStatusBarItem().hide();
-        vsh.VsCodeHelper.GetStatusBarItem().dispose();
+        vsh.VsCodeHelper.ResetOutputChannel();
+        vsh.VsCodeHelper.ResetStatusBarItem();
+
     });
     let disposableStart = vscode.commands.registerCommand('iisee.startServer', (args) =>
     {
-        var ls = new ls.LocalSettings();
-        ls.LoadSettings();
-        var iisServer = new srv.Server(ls.LoadedSettings);
-        //iisServer.StartServer();
-        let output = vsh.VsCodeHelper.GetOutputChannel();
-        let url = "Connecting to: http:\\\\localhost:" + iisServer.Settings.Port;
-        output.show(vscode.ViewColumn.Three);
-        output.appendLine(url);
-        let statusBar = vsh.VsCodeHelper.GetStatusBarItem();
-        statusBar.text = "$(browser) " + url;
-        statusBar.tooltip = "Click to stop server";
-        statusBar.command = "extension:iisee.stopServer";
-        statusBar.show();
-        
-
-
-
+        let localSettings = new ls.LocalSettings();
+        localSettings.LoadSettings();
+        var iisServer = new srv.Server(localSettings.LoadedSettings);
+        //check if the server environment is OK
+        if (iisServer.CheckEnvironment() == srv.ServerExecutionError.OK)
+        {
+            //execute server and show outputs
+            iisServer.StartServer(args);
+            let output = vsh.VsCodeHelper.GetOutputChannel();
+            let url = "Connecting to: http:\\\\localhost:" + iisServer.Settings.Port;
+            output.show(vscode.ViewColumn.Three);
+            output.appendLine(url);
+            let statusBar = vsh.VsCodeHelper.GetStatusBarItem();
+            statusBar.text = "$(stop) " + url;
+            statusBar.color = "orange";
+            statusBar.tooltip = "Click to stop server";
+            statusBar.command = "iisee.stopServer";
+            statusBar.show();
+        }
+        else
+        {
+            vscode.window.showErrorMessage("You have a problem with the environment, please execute \"check\" command for more details");
+        }
     }, this);
     context.subscriptions.push(disposableCheck);
     context.subscriptions.push(disposableSetPort);
@@ -239,7 +296,7 @@ function SetRunningFolder(val): void
             localSettings.LoadSettings();
             localSettings.LoadedSettings.RunningFolder = val;
             localSettings.UpdateSettings(localSettings.LoadedSettings);
-            vscode.window.showInformationMessage("The current folder path path now is: " + val);
+            vscode.window.showInformationMessage("The current folder path now is: " + val);
         }
         else
             vscode.window.showErrorMessage("You need to open a workspace directory before proceed");

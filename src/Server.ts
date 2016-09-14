@@ -6,7 +6,6 @@ import * as os from "os";
 import * as path from "path";
 import * as prc from "child_process";
 import * as settings from "./Settings";
-import * as iconv from "iconv-lite";
 import * as vsh from "./VScodeHelper";
 /**Errors */
 export enum ServerExecutionError
@@ -30,10 +29,10 @@ interface IServer
     /**Check if the environment can run extension and server */
     CheckEnvironment(): ServerExecutionError;
     /**Start the server */
-    StartServer(port: number, currentPath: string): void;
+    StartServer(currentPath: string): void;
     /**Stop server */
     StopServer(): void;
-    DecodeBuffer(daty: any): any;
+    GetBrowserString(browser: settings.Browser);
 }
 
 /**Server implementation */
@@ -102,24 +101,34 @@ export class Server implements IServer
         }
         return ServerExecutionError.OK;
     }
-    StartServer(): void
+    StartServer(selectedPath: any): void
     {
-        Server.Process = prc.spawn(this.Settings.IISPath, [(".path:" + this.Settings.RunningFolder), ("-port:" + this.Settings.Port)]);
-        //Attach all the events & functions to iisProcess
+        console.log(vscode.workspace.rootPath);
+        if (!selectedPath)
+            selectedPath = this.Settings.RunningFolder;
+        else
+        {
+            selectedPath = selectedPath._fsPath;
+        }
+
+        let url: string = selectedPath;
+        url = url.replace(this.Settings.RunningFolder, "");
+        let effectivePath = path.extname(selectedPath) != "" ? path.dirname(selectedPath) : selectedPath;
+        if (Server.Process == null)
+            Server.Process = prc.spawn(this.Settings.IISPath, [("-path:" + effectivePath), ("-port:" + this.Settings.Port)]);
+        let browser = prc.exec("start " + this.GetBrowserString(this.Settings.Browser) + " http://localhost:" + this.Settings.Port + url);
         Server.Process.stdout.on('data', function (data)
         {
-            var data = this.DecodeBuffer(data);
+            let toAppend = data;
             vsh.VsCodeHelper.GetOutputChannel().appendLine(data);
         });
         Server.Process.stderr.on('data', function (data)
         {
-            var data = this.DecodeBuffer(data);
             vsh.VsCodeHelper.GetOutputChannel().appendLine("stderr: " + data);            
         });
         Server.Process.on('error', function (err)
         {
-            var message = this.DecodeBuffer(err.message);
-            vsh.VsCodeHelper.GetOutputChannel().appendLine("ERROR: " + message);            
+            vsh.VsCodeHelper.GetOutputChannel().appendLine("ERROR: " + err);            
         });
     }
     StopServer(): boolean
@@ -132,13 +141,28 @@ export class Server implements IServer
         Server.Process = null;
         return true;
     }
-    DecodeBuffer(data: any): any
-    {
-        var buffer = new Buffer(data);
-        return iconv.decode(buffer, 'utf8');
-    }
     constructor(settings: IISSettings)
     {
         this.Settings = settings;
+    }
+    /**Return the browser string */
+    GetBrowserString(browser: settings.Browser)
+    {
+        switch (browser)
+        {
+            case settings.Browser.Opera:
+                {
+                    return "opera";
+                }
+            case settings.Browser.Firefox:
+                {
+                    return "firefox";
+                }
+            case settings.Browser.Chrome:
+                {
+                    return "chrome";
+                }
+        }
+        return "";
     }
 }

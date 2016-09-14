@@ -1,9 +1,14 @@
 {
   "name": "iis-express-executer",
   "displayName": "IIS Express executer",
-  "description": "",
-  "version": "0.0.1",
+  "description": "Start your site directly in IIS Express",
+  "version": "1.0.0",
+  "license": "MIT",
   "publisher": "Andreabbondanza",
+  "repository": {
+    "url": "github url",
+    "type": "Open Source"
+  },
   "engines": {
     "vscode": "^1.4.0"
   },
@@ -18,7 +23,8 @@
     "onCommand:iisee.setRunningFolder",
     "onCommand:iisee.startServer",
     "onCommand:iisee.stopServer",
-    "onCommand:iisee.setOSArch"
+    "onCommand:iisee.setOSArch",
+    "onCommand:iisee.setBrowser"
   ],
   "main": "./out/src/extension",
   "contributes": {
@@ -62,6 +68,11 @@
         "command": "iisee.stopServer",
         "title": "Stop ISS Express server",
         "category": "IIS-EE"
+      },
+      {
+        "command": "iisee.setBrowser",
+        "title": "Select the browser",
+        "category": "IIS-EE"
       }
     ],
     "menus": {
@@ -83,11 +94,9 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
-    "iconv-lite":"0.4.13",
     "typescript": "^1.8.5",
     "vscode": "^0.11.0"
   },
   "dependencies": {
-    
   }
 }

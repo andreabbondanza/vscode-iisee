@@ -10,6 +10,14 @@ export enum OSArch
     x64
 }
 
+export enum Browser
+{
+    MSEdge,
+    Firefox,
+    Opera,
+    Chrome
+}
+
 export interface IJSONSettings
 {
     /**Custom iis folder */
@@ -20,6 +28,8 @@ export interface IJSONSettings
     Port: number,
     /**Folder execution */
     RunningFolder: string;
+    /**Browser */
+    Browser: Browser;
 }
 
 interface ILocalSettings
@@ -33,7 +43,7 @@ interface ILocalSettings
     SetLocalSettings(json: string): boolean;
     CreateLocalSettingsFile(): boolean;
     CanOperate(): boolean,
-    GetDefaultSettings():IJSONSettings
+    GetDefaultSettings(): IJSONSettings;
 }
 
 
@@ -123,12 +133,13 @@ export class LocalSettings implements ILocalSettings
     }
     GetDefaultSettings(): IJSONSettings
     {
-        return { Port: 11117, RunningFolder: ".", Architecture: OSArch.x86, IISPath: path.join(process.env.ProgramFiles, 'IIS Express', 'iisexpress.exe') };
+        return { Port: 11117, RunningFolder: vscode.workspace.rootPath, Architecture: OSArch.x86, IISPath: path.join(process.env.ProgramFiles, 'IIS Express', 'iisexpress.exe'), Browser: Browser.MSEdge };
     }
+  
     /**Constructor */
     constructor()
     {
         this.DefaultPath = vscode.workspace.rootPath + "\\.vscode";
-        this.DefaultFile = this.DefaultPath  + "\\iis-e-settings.json";
+        this.DefaultFile = this.DefaultPath + "\\iis-e-settings.json";
     }
 }
