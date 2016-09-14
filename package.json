@@ -2,7 +2,7 @@
   "name": "iis-express-executer",
   "displayName": "IIS Express executer",
   "description": "Start your site directly in IIS Express",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "publisher": "Andreabbondanza",
   "icon": "images/icon.png",
