@@ -12,8 +12,6 @@ With this extension you can run your website in IIS directly from Visual studio 
 -Select wich browser you want open (MSEdge, Opera, Firefox, Chrome)
 -Set the port
 
-
-
 ## Requirements
 
 -Windows OSX
@@ -38,14 +36,3 @@ First release
 This is my first release and my first extension, please for every problem mail me to: andreabbondanza.developer@outlook.com
 
 [Andrea Vincenzo Abbondanza](http://www.andrewdev.eu)
-
-* Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (OSX) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
