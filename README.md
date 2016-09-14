@@ -1,20 +1,23 @@
-# iis-express-executer README
+# IIS Express Executer 
 
-This is the README for your extension "iis-express-executer". After writing up a brief description, we recommend including the following sections.
+With this extension you can run your website in IIS directly from Visual studio Code.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+*Check if your environment is compatible
+*Set a custom path for iis isntallation
+*Set a custom path for iis execution (you can also set it directly from workspace with right click context button)
+*Execute server directly in a folder from right button context menu
+*Reset default settings if you need
+*Select wich browser you want open (MSEdge, Opera, Firefox, Chrome)
+*Set the port
 
-For example if there is an image subfolder under your extension project workspace:
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+*Windows OSX
+*IIS Express
 
 ## Extension Settings
 
@@ -29,27 +32,19 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+*Nothing for now
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+This is my first release and my first extension, please for every problem mail me to: andreabbondanza.developer@outlook.com
 
 ### 1.0.0
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+First release
 
 -----------------------------------------------------------------------------------------------------------
 
-## Working with Markdown
+##Note
 
 **Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
 
