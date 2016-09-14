@@ -4,18 +4,18 @@ With this extension you can run your website in IIS directly from Visual studio 
 
 ## Features
 
--Check if your environment is compatible
--Set a custom path for iis isntallation
--Set a custom path for iis execution (you can also set it directly from workspace with right click context button)
--Execute server directly in a folder from right button context menu
--Reset default settings if you need
--Select wich browser you want open (MSEdge, Opera, Firefox, Chrome)
--Set the port
+- Check if your environment is compatible
+- Set a custom path for iis isntallation
+- Set a custom path for iis execution (you can also set it directly from workspace with right click context button)
+- Execute server directly in a folder from right button context menu
+- Reset default settings if you need
+- Select wich browser you want open (MSEdge, Opera, Firefox, Chrome)
+- Set the port
 
 ## Requirements
 
--Windows OSX
--IIS Express
+- Windows OSX
+- IIS Express
 
 ## Known Issues
 
