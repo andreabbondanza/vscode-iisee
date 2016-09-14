@@ -4,39 +4,39 @@ With this extension you can run your website in IIS directly from Visual studio 
 
 ## How to use
 
-###Check compatibility
+### Check compatibility
 Just press F1 to open prompt and select IIS-EE: Check option
 
-###Set Port or iis custom installation folder
+### Set Port or iis custom installation folder
 - Port: the port where server will listen
 - IIS installation path: If you have installed IIS Express in a custom folder you can set here the path
-Just press F1 to open prompt and select the appropriate IIS-EE: Set option
+Just press F1 to open prompt and select the appropriate IIS-EE: "Set" option
 
-###Set Browser or architecture
-You can select the browser to Execute
+### Set Browser or architecture
+You can select the opening browser
 - MSEdge
 - Opera
 - Firefox
 - Chrome
-and the architecture (if you have IIS Express installed in Program Filex (x89) select x86)
+and the architecture (if you have IIS Express installed in "Program Files(x86)" select the x86 option)
 - x86
 - x64
-Just press F1 to open prompt and select the appropriate IIS-EE: Set option
+Just press F1 to open prompt and select the appropriate IIS-EE: "Set" option
 
-###Set server running folder
-Just select wich folder is the root path for server execution
-You can set it from workspace (just press right mouse button and Set Running Folder option)
-Or if you want, just press F1 to open prompt and select the appropriate IIS-EE: Set option
+### Set server running folder
+Just select which folder is the root path for server execution.
+You can set it from workspace (just press right mouse button and "Set" Running Folder option)
+Or if you want, just press F1 to open prompt and select the appropriate IIS-EE: "Set" option
 NOTE: To select root workspace folder with mouse, just click on empty space in the panel and select the menu voice.
 
-###Start server
-You can start server from prompt (F1 with IIS-EE: Start server option) and it will be executed from the root path folder
-or you can start server by right mouse click and select the Start server voice.
-In this case, the root path for the execution will be the folder where you've clicked.
+### Start server
+You can start server from prompt (F1 with IIS-EE: "Start server" option) and it will be executed from the root path folder (from settings)
+or you can start server by right mouse click and select the "Start server" voice.
+In this case, the path for the execution will be the folder where you've clicked.
 NOTE: This will __NOT__ override the running folder in the settings.
 
 ###Stop server
-You can stop the server by typing IIS-EE: Stop option or clicking on the server (orange) url in the status bar  
+You can stop the server by typing IIS-EE: "Stop" option or clicking on the server (orange) url in the status bar  
 
 ## Features
 
@@ -45,7 +45,7 @@ You can stop the server by typing IIS-EE: Stop option or clicking on the server 
 - Set a custom path for iis execution (you can also set it directly from workspace with right click context button)
 - Execute server directly in a folder from right button context menu
 - Reset default settings if you need
-- Select wich browser you want open (MSEdge, Opera, Firefox, Chrome)
+- Select which browser you want open (MSEdge, Opera, Firefox, Chrome)
 - Set the port
 
 ## Requirements
