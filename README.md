@@ -40,7 +40,7 @@ or you can start server by right mouse click and select the "Start server" voice
 In this case, the path for the execution will be the folder where you've clicked.
 NOTE: This will __NOT__ override the running folder in the settings.
 
-###Stop server
+### Stop server
 You can stop the server by typing IIS-EE: "Stop" option or clicking on the server (orange) url in the status bar  
 
 ## Features
