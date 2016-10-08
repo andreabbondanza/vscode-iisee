@@ -1,6 +1,9 @@
 # IIS Express Executer 
 
 With this extension you can run your website in IIS directly from Visual studio Code.
+This extension works with the default iis express applicationhost.config file (documents/iis express/config/applicationhost.config).
+This is cool because when you install php or other stuff, the edited config file is updated and all the features will work with the execution from vscode.
+
 
 ## How to use
 
@@ -10,6 +13,7 @@ Just press F1 to open prompt and select IIS-EE: Check option
 ### Set Port or iis custom installation folder
 - Port: the port where server will listen
 - IIS installation path: If you have installed IIS Express in a custom folder you can set here the path
+
 Just press F1 to open prompt and select the appropriate IIS-EE: "Set" option
 
 ### Set Browser or architecture
@@ -18,9 +22,11 @@ You can select the opening browser
 - Opera
 - Firefox
 - Chrome
+
 and the architecture (if you have IIS Express installed in "Program Files(x86)" select the x86 option)
 - x86
 - x64
+
 Just press F1 to open prompt and select the appropriate IIS-EE: "Set" option
 
 ### Set server running folder

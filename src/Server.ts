@@ -120,7 +120,6 @@ export class Server implements IServer
             //add site to default config file
             Server.Process = prc.spawnSync(appcmd, [("add"), ("site"), ("-name:" + path.basename(vscode.workspace.rootPath).replace(" ","_")), ("-bindings:http://localhost:" + this.Settings.Port),
                 ("-physicalPath:" + effectivePath)]);
-            vsh.VsCodeHelper.GetOutputChannel().appendLine(Server.Process.output);
             Server.Process = prc.spawn(this.Settings.IISPath, [("-site:" + path.basename(vscode.workspace.rootPath).replace(" ","_") )]);
         }            
         let browser = prc.exec("start " + this.GetBrowserString(this.Settings.Browser) + " http://localhost:" + this.Settings.Port + url);
