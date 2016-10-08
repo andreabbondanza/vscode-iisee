@@ -1,7 +1,7 @@
 # IIS Express Executer 
 
 With this extension you can run your website in IIS directly from Visual studio Code.
-This extension works with the default iis express applicationhost.config file (documents/iis express/config/applicationhost.config).
+This extension works with the default iis express __applicationhost.config__ file (documents/iis express/config/applicationhost.config).
 This is cool because when you install php or other stuff, the edited config file is updated and all the features will work with the execution from vscode.
 
 ## How to use
@@ -26,19 +26,21 @@ and the architecture (if you have IIS Express installed in "Program Files(x86)" 
 - x86
 - x64
 
-Just press F1 to open prompt and select the appropriate IIS-EE: "Set" option
+Just press __F1__ to open prompt and select the appropriate IIS-EE: "Set" option
 
 ### Set server running folder
 Just select which folder is the root path for server execution.
-You can set it from workspace (just press right mouse button and "Set" Running Folder option)
+You can set it from workspace (just press right __mouse__ button and "Set" Running Folder option)
 Or if you want, just press F1 to open prompt and select the appropriate IIS-EE: "Set" option
-NOTE: To select root workspace folder with mouse, just click on empty space in the panel and select the menu voice.
+
+__NOTE:__ To select root workspace folder with mouse, just click on empty space in the panel and select the menu voice.
 
 ### Start server
 You can start server from prompt (F1 with IIS-EE: "Start server" option) and it will be executed from the root path folder (from settings)
-or you can start server by right mouse click and select the "Start server" voice.
+or you can start server by right __mouse__ click and select the "Start server" voice.
 In this case, the path for the execution will be the folder where you've clicked.
-NOTE: This will __NOT__ override the running folder in the settings.
+
+__NOTE:__ This will __NOT__ override the running folder in the settings.
 
 ### Stop server
 You can stop the server by typing IIS-EE: "Stop" option or clicking on the server (orange) url in the status bar  
