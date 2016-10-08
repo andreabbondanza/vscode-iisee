@@ -4,7 +4,6 @@ With this extension you can run your website in IIS directly from Visual studio 
 This extension works with the default iis express applicationhost.config file (documents/iis express/config/applicationhost.config).
 This is cool because when you install php or other stuff, the edited config file is updated and all the features will work with the execution from vscode.
 
-
 ## How to use
 
 ### Check compatibility
@@ -65,9 +64,9 @@ You can stop the server by typing IIS-EE: "Stop" option or clicking on the serve
 
 ## Release Notes
 
-Nothing
+Now the extension works with iis express default applicationhost.config file, so if you install php or other stuff for iis express, you can use them directly from vscode.
 
-### 1.0.0
+### 1.5.0
 
 First release
 
