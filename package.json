@@ -1,116 +1,118 @@
 {
-  "name": "iis-express-executer",
-  "displayName": "IIS Express executer",
-  "description": "Start your site directly in IIS Express",
-  "version": "1.1.0",
-  "license": "MIT",
-  "publisher": "Andreabbondanza",
-  "icon": "images/icon.png",
-  "repository": {
-    "url": "https://github.com/andreabbondanza/vscode-iisee",
-    "type": "Open Source"
-  },
-  "keywords": [
-    "server","iis","express","iis express"
-  ],
-  "author": {
-    "name":"Andrea Vincenzo Abbondanza",
-    "email": "andreabbondanza.developer@outlook.com",
-    "url": "http://www.andrewdev.eu"
-  },
-  "galleryBanner": {
-    "theme": "light",
-    "color": "#FFFFFF"
-  },
-  "homepage": "https://github.com/andreabbondanza/vscode-iisee/blob/master/README.md",  
-  "engines": {
-    "vscode": "^1.4.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onCommand:iisee.checkComp",
-    "onCommand:iisee.setPort",
-    "onCommand:iisee.setIISPath",
-    "onCommand:iisee.reset",
-    "onCommand:iisee.setRunningFolder",
-    "onCommand:iisee.startServer",
-    "onCommand:iisee.stopServer",
-    "onCommand:iisee.setOSArch",
-    "onCommand:iisee.setBrowser"
-  ],
-  "main": "./out/src/extension",
-  "contributes": {
-    "commands": [
-      {
-        "command": "iisee.checkComp",
-        "title": "Check if your environment can run IIS-Express-Executer",
-        "category": "IIS-EE"
-      },
-      {
-        "command": "iisee.reset",
-        "title": "Reset settings for current environment",
-        "category": "IIS-EE"
-      },
-      {
-        "command": "iisee.setPort",
-        "title": "Set server port",
-        "category": "IIS-EE"
-      },
-      {
-        "command": "iisee.setRunningFolder",
-        "title": "Set server running folder",
-        "category": "IIS-EE"
-      },
-      {
-        "command": "iisee.setIISPath",
-        "title": "Set IIS custom path, with file (eg. \"Mypath\\IIS Express\\iisexpress.exe\")",
-        "category": "IIS-EE"
-      },
-      {
-        "command": "iisee.setOSArch",
-        "title": "Set operating system architecture",
-        "category": "IIS-EE"
-      },
-      {
-        "command": "iisee.startServer",
-        "title": "Start ISS Express server",
-        "category": "IIS-EE"
-      },
-      {
-        "command": "iisee.stopServer",
-        "title": "Stop ISS Express server",
-        "category": "IIS-EE"
-      },
-      {
-        "command": "iisee.setBrowser",
-        "title": "Select the browser",
-        "category": "IIS-EE"
-      }
+    "name": "iis-express-executer",
+    "displayName": "IIS Express executer",
+    "description": "Start your site directly in IIS Express",
+    "version": "1.1.1",
+    "license": "MIT",
+    "publisher": "Andreabbondanza",
+    "icon": "images/icon.png",
+    "repository": {
+        "url": "https://github.com/andreabbondanza/vscode-iisee",
+        "type": "Open Source"
+    },
+    "keywords": [
+        "server",
+        "iis",
+        "express",
+        "iis express"
     ],
-    "menus": {
-      "explorer/context": [
-        {
-          "command": "iisee.startServer",
-          "group": "IIS-EE"
-        },
-        {
-          "command": "iisee.setRunningFolder",
-          "group": "IIS-EE"
+    "author": {
+        "name": "Andrea Vincenzo Abbondanza",
+        "email": "andreabbondanza.developer@outlook.com",
+        "url": "http://www.andrewdev.eu"
+    },
+    "galleryBanner": {
+        "theme": "light",
+        "color": "#FFFFFF"
+    },
+    "homepage": "https://github.com/andreabbondanza/vscode-iisee/blob/master/README.md",
+    "engines": {
+        "vscode": "^1.4.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:iisee.checkComp",
+        "onCommand:iisee.setPort",
+        "onCommand:iisee.setIISPath",
+        "onCommand:iisee.reset",
+        "onCommand:iisee.setRunningFolder",
+        "onCommand:iisee.startServer",
+        "onCommand:iisee.stopServer",
+        "onCommand:iisee.setOSArch",
+        "onCommand:iisee.setBrowser"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "iisee.checkComp",
+                "title": "Check if your environment can run IIS-Express-Executer",
+                "category": "IIS-EE"
+            },
+            {
+                "command": "iisee.reset",
+                "title": "Reset settings for current environment",
+                "category": "IIS-EE"
+            },
+            {
+                "command": "iisee.setPort",
+                "title": "Set server port",
+                "category": "IIS-EE"
+            },
+            {
+                "command": "iisee.setRunningFolder",
+                "title": "Set server running folder",
+                "category": "IIS-EE"
+            },
+            {
+                "command": "iisee.setIISPath",
+                "title": "Set IIS custom path, with file (eg. \"Mypath\\IIS Express\\iisexpress.exe\")",
+                "category": "IIS-EE"
+            },
+            {
+                "command": "iisee.setOSArch",
+                "title": "Set operating system architecture",
+                "category": "IIS-EE"
+            },
+            {
+                "command": "iisee.startServer",
+                "title": "Start ISS Express server",
+                "category": "IIS-EE"
+            },
+            {
+                "command": "iisee.stopServer",
+                "title": "Stop ISS Express server",
+                "category": "IIS-EE"
+            },
+            {
+                "command": "iisee.setBrowser",
+                "title": "Select the browser",
+                "category": "IIS-EE"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "iisee.startServer",
+                    "group": "IIS-EE"
+                },
+                {
+                    "command": "iisee.setRunningFolder",
+                    "group": "IIS-EE"
+                }
+            ]
         }
-      ]
-    }
-  },
-  "scripts": {
-    "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install"
-  },
-  "devDependencies": {
-    "typescript": "^1.8.5",
-    "vscode": "^0.11.0"
-  },
-  "dependencies": {
-  }
+    },
+    "scripts": {
+        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "typescript": "^1.8.5",
+        "vscode": "^0.11.0"
+    },
+    "dependencies": {}
 }
