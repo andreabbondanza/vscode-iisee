@@ -4,6 +4,11 @@ With this extension you can run your website in IIS directly from Visual studio 
 This extension works with the default iis express __applicationhost.config__ file (documents/iis express/config/applicationhost.config).
 This is cool because when you install php or other stuff, the edited config file is updated and all the features will work with the execution from vscode.
 
+##WARNING
+
+The workspace root name is used like site name (unique) in the file.
+If you use another project with the same name, the new project settings will overwrite the old project settings.
+
 ## How to use
 
 ### Check compatibility
