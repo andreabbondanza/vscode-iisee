@@ -117,9 +117,11 @@ export class Server implements IServer
         if (Server.Process == null)
         {
             let appcmd = path.dirname(this.Settings.IISPath) + "\\appcmd.exe";
-            //add site to default config file
+            //need to refresh
+            Server.Process = prc.spawnSync(appcmd, [("delete"), ("site"), (path.basename(vscode.workspace.rootPath).replace(" ", "_"))]);
+            //add site to default config file            
             Server.Process = prc.spawnSync(appcmd, [("add"), ("site"), ("-name:" + path.basename(vscode.workspace.rootPath).replace(" ","_")), ("-bindings:http://localhost:" + this.Settings.Port),
-                ("-physicalPath:" + effectivePath)]);
+                ("-physicalPath:" + effectivePath)]);            
             Server.Process = prc.spawn(this.Settings.IISPath, [("-site:" + path.basename(vscode.workspace.rootPath).replace(" ","_") )]);
         }            
         let browser = prc.exec("start " + this.GetBrowserString(this.Settings.Browser) + " http://localhost:" + this.Settings.Port + url);
