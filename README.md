@@ -62,7 +62,7 @@ You can stop the server by typing IIS-EE: "Stop" option or clicking on the serve
 
 ## Requirements
 
-- Windows OSX
+- Windows OS
 - IIS Express
 
 ## Known Issues
