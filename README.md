@@ -33,6 +33,13 @@ and the architecture (if you have IIS Express installed in "Program Files(x86)" 
 
 Just press __F1__ to open prompt and select the appropriate IIS-EE: "Set" option
 
+### Set protocol for https support
+You can set the protocol
+- http
+- https
+
+Just press __F1__ to open prompt and select the appropriate IIS-EE: "Set" option
+
 ### Set server running folder
 Just select which folder is the root path for server execution.
 You can set it from workspace (just press right __mouse__ button and "Set" Running Folder option)

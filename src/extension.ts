@@ -236,6 +236,43 @@ export function activate(context: vscode.ExtensionContext)
         );
 
     }, this);
+    let disposableSetProtocol = vscode.commands.registerCommand('iisee.setProtocol', (args) =>
+    {
+        var qPick = vscode.window.showQuickPick(["http", "https"], { placeHolder: "http" }).then((args) => 
+        {
+            if (!args)
+                return;
+            else
+            {
+                let prot = ls.Protocol.http;
+                switch (args)
+                {
+                    case "http":
+                        {
+                            prot = ls.Protocol.http;
+                            break;
+                        }
+                    case "https":
+                        {
+                            prot = ls.Protocol.https;
+                            break;
+                        }
+                }
+                let localSettings = new ls.LocalSettings();
+                if (localSettings.CanOperate())
+                {
+                    localSettings.LoadSettings();
+                    localSettings.LoadedSettings.Protocol = prot;
+                    localSettings.UpdateSettings(localSettings.LoadedSettings);
+                    vscode.window.showInformationMessage("The current protocol is : " + args);
+                }
+                else
+                    vscode.window.showErrorMessage("You need to open a workspace directory before proceed");
+            }
+        }
+        );
+
+    }, this);
     let disposableStop = vscode.commands.registerCommand('iisee.stopServer', (args) =>
     {
         let localSettings = new ls.LocalSettings();
@@ -260,7 +297,7 @@ export function activate(context: vscode.ExtensionContext)
             //execute server and show outputs
             iisServer.StartServer(args);
             let output = vsh.VsCodeHelper.GetOutputChannel();
-            let url = "Connecting to: http:\\\\localhost:" + iisServer.Settings.Port;
+            let url = "Connecting to: "+(iisServer.Settings.Protocol == ls.Protocol.https ? "https" : "http")+":\\\\localhost:" + iisServer.Settings.Port;
             output.show(vscode.ViewColumn.Three);
             output.appendLine(url);
             let statusBar = vsh.VsCodeHelper.GetStatusBarItem();
@@ -283,6 +320,7 @@ export function activate(context: vscode.ExtensionContext)
     context.subscriptions.push(disposableSetArch);
     context.subscriptions.push(disposableStart);
     context.subscriptions.push(disposableStop);
+    context.subscriptions.push(disposableSetProtocol)
 }
 function SetRunningFolder(val): void
 {

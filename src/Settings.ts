@@ -4,6 +4,12 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
+export enum Protocol
+{
+    http,
+    https
+}    
+
 export enum OSArch
 {
     x86,
@@ -30,6 +36,8 @@ export interface IJSONSettings
     RunningFolder: string;
     /**Browser */
     Browser: Browser;
+    /**Protocol */
+    Protocol: Protocol;
 }
 
 interface ILocalSettings
@@ -133,7 +141,7 @@ export class LocalSettings implements ILocalSettings
     }
     GetDefaultSettings(): IJSONSettings
     {
-        return { Port: 11117, RunningFolder: vscode.workspace.rootPath, Architecture: OSArch.x86, IISPath: path.join(process.env.ProgramFiles, 'IIS Express', 'iisexpress.exe'), Browser: Browser.MSEdge };
+        return { Port: 11117, RunningFolder: vscode.workspace.rootPath, Architecture: OSArch.x86, IISPath: path.join(process.env.ProgramFiles, 'IIS Express', 'iisexpress.exe'), Browser: Browser.MSEdge, Protocol: Protocol.http  };
     }
   
     /**Constructor */
