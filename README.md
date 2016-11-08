@@ -78,7 +78,11 @@ You can stop the server by typing IIS-EE: "Stop" option or clicking on the serve
 
 ## Release Notes
 
-### 1.1.0
+### 1.1.4
+
+Added protocol setting for https support
+
+### 1.1.1
 
 Now the extension works with iis express default applicationhost.config file, so if you install php or other stuff for iis express, you can use them directly from vscode.
 In other words, now the extension is compatible with __PHP__ and other stuff for iis.
