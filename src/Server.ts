@@ -139,6 +139,38 @@ export class Server implements IServer
             vsh.VsCodeHelper.GetOutputChannel().appendLine("ERROR: " + err);            
         });
     }
+    StartServerScript(selectedPath: string): void
+    {
+        console.log(vscode.workspace.rootPath);
+        let url: string = selectedPath;
+        url = url.replace(this.Settings.RunningFolder, "");
+        let effectivePath = path.extname(selectedPath) != "" ? path.dirname(selectedPath) : selectedPath;
+        let protocol = this.Settings.Protocol == settings.Protocol.https ? "https" : "http";
+        if (Server.Process == null)
+        {
+            let appcmd = path.dirname(this.Settings.IISPath) + "\\appcmd.exe";
+            //need to refresh
+            Server.Process = prc.spawnSync(appcmd, [("delete"), ("site"), (path.basename(vscode.workspace.rootPath).replace(" ", "_"))]);
+            //add site to default config file            
+            Server.Process = prc.spawnSync(appcmd, [("add"), ("site"), ("-name:" + path.basename(vscode.workspace.rootPath).replace(" ","_")), ("-bindings:"+protocol+"://localhost:" + this.Settings.Port),
+                ("-physicalPath:" + effectivePath)]);            
+            Server.Process = prc.spawn(this.Settings.IISPath, [("-site:" + path.basename(vscode.workspace.rootPath).replace(" ","_") )]);
+        }            
+        let browser = prc.exec("start " + this.GetBrowserString(this.Settings.Browser) + " "+protocol+"://localhost:" + this.Settings.Port + url);
+        Server.Process.stdout.on('data', function (data)
+        {
+            let toAppend = data;
+            vsh.VsCodeHelper.GetOutputChannel().appendLine(data);
+        });
+        Server.Process.stderr.on('data', function (data)
+        {
+            vsh.VsCodeHelper.GetOutputChannel().appendLine("stderr: " + data);            
+        });
+        Server.Process.on('error', function (err)
+        {
+            vsh.VsCodeHelper.GetOutputChannel().appendLine("ERROR: " + err);            
+        });
+    }
     StopServer(): boolean
     {
         if (Server.Process == null)

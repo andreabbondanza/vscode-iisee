@@ -40,6 +40,7 @@
         "onCommand:iisee.reset",
         "onCommand:iisee.setRunningFolder",
         "onCommand:iisee.startServer",
+        "onCommand:iisee.startServerFromScript",
         "onCommand:iisee.stopServer",
         "onCommand:iisee.setOSArch",
         "onCommand:iisee.setBrowser"
@@ -85,6 +86,11 @@
             {
                 "command": "iisee.startServer",
                 "title": "Start ISS Express server",
+                "category": "IIS-EE"
+            },
+            {
+                "command": "iisee.startServerFromScript",
+                "title": "Start ISS Express server from current file",
                 "category": "IIS-EE"
             },
             {

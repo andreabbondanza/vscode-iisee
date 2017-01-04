@@ -52,6 +52,9 @@ You can start server from prompt (F1 with IIS-EE: "Start server" option) and it 
 or you can start server by right __mouse__ click and select the "Start server" voice.
 In this case, the path for the execution will be the folder where you've clicked.
 
+### Start server from script
+You can start the server and the current opened script directly by the (F1 with IIS-EE: "Start ISS Express server from current file") command.
+
 __NOTE:__ This will __NOT__ override the running folder in the settings.
 
 ### Stop server
@@ -77,6 +80,10 @@ You can stop the server by typing IIS-EE: "Stop" option or clicking on the serve
 *Nothing for now
 
 ## Release Notes
+
+### 1.1.5
+
+Now you can start a script with a direct command
 
 ### 1.1.4
 

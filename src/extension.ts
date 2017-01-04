@@ -312,6 +312,38 @@ export function activate(context: vscode.ExtensionContext)
             vscode.window.showErrorMessage("You have a problem with the environment, please execute \"check\" command for more details");
         }
     }, this);
+    let disposableStartFromScript = vscode.commands.registerCommand('iisee.startServerFromScript', (args) =>
+    {
+        let localSettings = new ls.LocalSettings();
+        localSettings.LoadSettings();
+        var iisServer = new srv.Server(localSettings.LoadedSettings);
+        //check if the server environment is OK
+        if (iisServer.CheckEnvironment() == srv.ServerExecutionError.OK)
+        {
+            //execute server and show outputs
+            let file = vscode.window.activeTextEditor.document.fileName;
+            if (file != "")
+            {
+                iisServer.StartServerScript(file);
+                let output = vsh.VsCodeHelper.GetOutputChannel();
+                let url = "Connecting to: " + (iisServer.Settings.Protocol == ls.Protocol.https ? "https" : "http") + ":\\\\localhost:" + iisServer.Settings.Port;
+                output.show(vscode.ViewColumn.Three);
+                output.appendLine(url);
+                let statusBar = vsh.VsCodeHelper.GetStatusBarItem();
+                statusBar.text = "$(stop) " + url;
+                statusBar.color = "orange";
+                statusBar.tooltip = "Click to stop server";
+                statusBar.command = "iisee.stopServer";
+                statusBar.show();
+            }
+            else
+                vscode.window.showErrorMessage("You should have an opened file to execute server from script");
+        }
+        else
+        {
+            vscode.window.showErrorMessage("You have a problem with the environment, please execute \"check\" command for more details");
+        }
+    }, this);
     context.subscriptions.push(disposableCheck);
     context.subscriptions.push(disposableSetPort);
     context.subscriptions.push(disposableSetIISPath);
@@ -319,6 +351,7 @@ export function activate(context: vscode.ExtensionContext)
     context.subscriptions.push(disposableSetRunningFolder);
     context.subscriptions.push(disposableSetArch);
     context.subscriptions.push(disposableStart);
+    context.subscriptions.push(disposableStartFromScript);
     context.subscriptions.push(disposableStop);
     context.subscriptions.push(disposableSetProtocol)
 }
