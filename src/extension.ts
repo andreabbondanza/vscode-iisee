@@ -2,6 +2,7 @@
 
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
+import * as fsystem from 'fs';
 import * as vscode from 'vscode';
 import * as ls from './Settings';
 import * as srv from './Server';
@@ -156,8 +157,11 @@ export function activate(context: vscode.ExtensionContext)
             if (args != null)
                 nextPath = args._fsPath;
             //remove eventually file in the path
-            var basePath = path.extname(nextPath) != "" ? path.dirname(nextPath) : nextPath;
-            SetRunningFolder(basePath);
+            let isDir = fsystem.lstatSync(nextPath).isDirectory();
+            if (isDir)
+                SetRunningFolder(nextPath);
+            else
+                vscode.window.showErrorMessage("You cannot set a file like running folder!");
         }
     }, this);
     let disposableSetArch = vscode.commands.registerCommand('iisee.setOSArch', (args) =>

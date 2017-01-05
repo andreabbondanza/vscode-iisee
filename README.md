@@ -81,6 +81,10 @@ You can stop the server by typing IIS-EE: "Stop" option or clicking on the serve
 
 ## Release Notes
 
+### 1.1.6
+
+Fixed the bug for dotted folders
+
 ### 1.1.5
 
 Now you can start a script with a direct command

@@ -1,5 +1,6 @@
 "use strict";
 
+import * as fsystem from 'fs';
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as os from "os";
@@ -112,7 +113,8 @@ export class Server implements IServer
         }
         let url: string = selectedPath;
         url = url.replace(this.Settings.RunningFolder, "");
-        let effectivePath = path.extname(selectedPath) != "" ? path.dirname(selectedPath) : selectedPath;
+        let isDir = fsystem.lstatSync(selectedPath).isDirectory();
+        let effectivePath = !isDir ? path.dirname(selectedPath) : selectedPath;
         let protocol = this.Settings.Protocol == settings.Protocol.https ? "https" : "http";
         if (Server.Process == null)
         {
