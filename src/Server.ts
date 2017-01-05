@@ -145,9 +145,8 @@ export class Server implements IServer
     {
         console.log(vscode.workspace.rootPath);
         let url: string = selectedPath;
-        url = url.replace(this.Settings.RunningFolder, "");
-        let isDir = fsystem.lstatSync(selectedPath).isDirectory();
-        let effectivePath = !isDir ? path.dirname(selectedPath) : selectedPath;
+        url = url.replace(path.dirname(selectedPath), "");
+        let effectivePath = path.dirname(selectedPath);
         let protocol = this.Settings.Protocol == settings.Protocol.https ? "https" : "http";
         if (Server.Process == null)
         {
