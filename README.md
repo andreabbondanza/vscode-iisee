@@ -81,7 +81,7 @@ You can stop the server by typing IIS-EE: "Stop" option or clicking on the serve
 
 ## Release Notes
 
-### 1.1.6
+### 1.1.7
 
 Fixed the bug for dotted folders
 
