@@ -25,6 +25,7 @@ You can select the opening browser
 - MSEdge
 - Opera
 - Firefox
+- Vivaldi Browser
 - Chrome
 
 and the architecture (if you have IIS Express installed in "Program Files(x86)" select the x86 option)
