@@ -81,6 +81,10 @@ You can stop the server by typing IIS-EE: "Stop" option or clicking on the serve
 
 ## Release Notes
 
+### 1.2.0
+
+Added support to __Vivaldi__ Browser
+
 ### 1.1.8
 
 Fixed a problem about the current file execution

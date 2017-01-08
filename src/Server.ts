@@ -204,6 +204,10 @@ export class Server implements IServer
                 {
                     return "chrome";
                 }
+            case settings.Browser.Vivaldi:
+                {
+                    return "vivaldi";
+            }    
         }
         return "";
     }

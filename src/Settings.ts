@@ -21,6 +21,7 @@ export enum Browser
     MSEdge,
     Firefox,
     Opera,
+    Vivaldi,
     Chrome
 }
 

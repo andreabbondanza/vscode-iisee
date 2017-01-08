@@ -199,7 +199,7 @@ export function activate(context: vscode.ExtensionContext)
     }, this);
     let disposableSetBrow = vscode.commands.registerCommand('iisee.setBrowser', (args) =>
     {
-        var qPick = vscode.window.showQuickPick(["Edge", "Opera", "Firefox", "Chrome"], { placeHolder: "Edge" }).then((args) => 
+        var qPick = vscode.window.showQuickPick(["Edge", "Opera", "Firefox", "Chrome","Vivaldi"], { placeHolder: "Edge" }).then((args) => 
         {
             if (!args)
                 return;
@@ -221,6 +221,11 @@ export function activate(context: vscode.ExtensionContext)
                     case "Chrome":
                         {
                             brow = ls.Browser.Chrome;
+                            break;
+                        }
+                    case "Vivaldi":
+                        {
+                            brow = ls.Browser.Vivaldi;
                             break;
                         }
                 }
