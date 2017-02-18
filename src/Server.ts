@@ -181,6 +181,7 @@ export class Server implements IServer
         }
         Server.Process.kill('SIGINT');
         Server.Process = null;
+        vsh.VsCodeHelper.ResetOutputChannel();
         return true;
     }
     constructor(settings: IISSettings)

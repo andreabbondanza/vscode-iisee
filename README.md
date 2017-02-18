@@ -83,6 +83,10 @@ You can stop the server by typing IIS-EE: "Stop" option or clicking on the serve
 
 ## Release Notes
 
+### 1.2.2
+
+Fixed repeated output channel 
+
 ### 1.2.1
 
 Added support to __Vivaldi__ Browser
@@ -121,4 +125,4 @@ This is my first release and my first extension, please for every problem mail m
 [Andrea Vincenzo Abbondanza](http://www.andrewdev.eu)
 
 ## Donation
-[Help me to grow up, if you want](https://payPal.me/andreabbondanza)
+[Offer me a tea](https://payPal.me/andreabbondanza)
