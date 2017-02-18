@@ -6,7 +6,7 @@ import * as vscode from "vscode";
 export class VsCodeHelper
 {
     static StatusBar = null;
-    static OutputChannel = null;
+    static OutputChannel : vscode.OutputChannel = null;
     /**Return the output channel instance */
     static GetOutputChannel(): vscode.OutputChannel
     {
@@ -22,7 +22,6 @@ export class VsCodeHelper
     {
         VsCodeHelper.OutputChannel.clear();
         VsCodeHelper.OutputChannel.hide();
-        VsCodeHelper.OutputChannel.dispose();
         VsCodeHelper.OutputChannel = null;
     }
     /**reset the status bar */
