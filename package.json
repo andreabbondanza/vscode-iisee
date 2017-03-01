@@ -2,7 +2,7 @@
     "name": "iis-express-executer",
     "displayName": "IIS Express executer",
     "description": "Start your site directly in IIS Express",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "license": "MIT",
     "publisher": "Andreabbondanza",
     "icon": "images/icon.png",
@@ -85,17 +85,17 @@
             },
             {
                 "command": "iisee.startServer",
-                "title": "Start ISS Express server",
+                "title": "Start IIS Express server",
                 "category": "IIS-EE"
             },
             {
                 "command": "iisee.startServerFromScript",
-                "title": "Start ISS Express server from current file",
+                "title": "Start IIS Express server from current file",
                 "category": "IIS-EE"
             },
             {
                 "command": "iisee.stopServer",
-                "title": "Stop ISS Express server",
+                "title": "Stop IIS Express server",
                 "category": "IIS-EE"
             },
             {

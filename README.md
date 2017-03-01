@@ -83,9 +83,9 @@ You can stop the server by typing IIS-EE: "Stop" option or clicking on the serve
 
 ## Release Notes
 
-### 1.2.2
+### 1.2.4
 
-Fixed repeated output channel 
+Fixed ISS to IIS in some strings
 
 ### 1.2.1
 
